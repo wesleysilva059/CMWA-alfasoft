@@ -26,7 +26,6 @@ class ContactController extends Controller
 
     public function store(ContactRequest $request)
     {
-        dd($request);
         $contact = new Contact();
         $contact->name = $request->name;
         $contact->contact = $request->contact;
