@@ -26,11 +26,16 @@ class ContactController extends Controller
 
     public function store(ContactRequest $request)
     {
+        dd($request);
         $contact = new Contact();
         $contact->name = $request->name;
         $contact->contact = $request->contact;
         $contact->email = $request->email;
         $contact->save();
+
+        if ($contact) {
+            return redirect()->to(route('contact.index'));
+        }
     }
 
     public function show($id)
@@ -54,6 +59,10 @@ class ContactController extends Controller
         $contact->contact = $request->contact;
         $contact->email = $request->email;
         $contact->save();
+
+        if ($contact) {
+            return redirect()->to(route('contact.index'));
+        }
     }
 
     public function delete($id)
