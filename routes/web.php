@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+require __DIR__.'/auth.php';
+
+Route::prefix('contacts')->group( function () {
+    Route::get('/', [ContactController::class, 'index'])->name('contact.index');
+
+    Route::middleware('auth')->group( function () {
+        Route::get('/create', [ContactController::class, 'create'])->name('contact.create');
+        Route::post('/store', [ContactController::class, 'store'])->name('contact.store');
+        Route::get('/show/{id}', [ContactController::class, 'show'])->name('contact.show');
+        Route::get('/edit/{id}', [ContactController::class, 'edit'])->name('contact.edit');
+        Route::put('/update', [ContactController::class, 'update'])->name('contact.update');
+        Route::delete('/delete/{id}', [ContactController::class, 'delete'])->name('contact.delete');
+    });
 });
