@@ -33,7 +33,7 @@ class ContactController extends Controller
         $contact->save();
 
         if ($contact) {
-            return redirect()->to(route('contact.index'));
+            return redirect()->route('contact.index');
         }
     }
 
@@ -60,7 +60,7 @@ class ContactController extends Controller
         $contact->save();
 
         if ($contact) {
-            return redirect()->to(route('contact.index'));
+            return redirect()->route('contact.index');
         }
     }
 
@@ -68,5 +68,7 @@ class ContactController extends Controller
     {
         $contact = Contact::find($id);
         $contact->delete();
+
+        return redirect()->route('contact.index');
     }
 }

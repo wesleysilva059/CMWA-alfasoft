@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ContactRequest extends FormRequest
 {
@@ -24,9 +26,9 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|min:5',
-            'contact' => 'required|digits:9|unique:contacts',
-            'email' => 'required|email|unique:contacts',
+            'name' => ['required','string','min:5'],
+            'contact' => ['required','digits:9',Rule::unique('contacts')->ignore($this->id)],
+            'email' => ['required','email',Rule::unique('contacts')->ignore($this->id)],
         ];
     }
 }
