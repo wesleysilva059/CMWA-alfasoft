@@ -1,8 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
+      <div class="flex justify-between ...">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create a new Contact') }}
+          {{ __('Create a new Contact') }}
         </h2>
+        <div class="inset-y-0 right-0">
+            <a href="{{ route('contact.index') }}" class="px-6 py-3 text-blue-100 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:underline hover:text-blue-200">Go back</a>
+        </div>
+      </div>
     </x-slot>
 
     <div class="py-12">

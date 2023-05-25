@@ -1,16 +1,31 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit a Contact') }}
-        </h2>
+        <div class="flex justify-between ...">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Edit a Contact') }}
+            </h2>
+            <div class="inset-y-0 right-0">
+                <a href="{{ route('contact.index') }}" class="px-6 py-3 text-blue-100 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:underline hover:text-blue-200">Go back</a>
+              </div>
+        </div>
+        
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form class="w-full max-w-lg" action="{{route('contact.update')}}" method="PUT">
+                    @if($errors->all())
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-danger">
+                                {{ $error }}
+                            </div>
+                        @endforeach
+                    @endif
+                    <form class="w-full max-w-lg" method="post" action="{{route('contact.update')}}">
                         @csrf
+                        @method('PUT')
+                        <input type="hidden" name="id" value="{{ $contact->id }}">
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
